@@ -18,17 +18,17 @@ function main() {
   let sair = false;
 
   while (!sair) {
-    const opcao = prompt('Digite "1" para listar contatos, "2" para adicionar um contato, "3" para excluir um contato, ou "4" para sair: ');
+    const opcao = prompt('Digite "1" para adicionar um contato, Digite "2" para listar contatos, Digite "3" para excluir um contato ou Digite "4" para sair. ');
 
     switch (opcao) {
       case '1':
-        adicionar();
+        adicionarContato();
         break;
       case '2':
-        listar();
+        listarContatos();
         break;
       case '3':
-        excluir();
+        excluirContato();
         break;
       case '4':
         console.log('Saindo...');
