@@ -1,4 +1,6 @@
 // contatos.js
+const prompt = require('prompt-sync')();
+
 let contatos = [
   { id: 1, nome: 'Alice', telefone: '1234-5678', email: 'alice@example.com' },
   { id: 2, nome: 'Bob', telefone: '8765-4321', email: 'bob@example.com' },
@@ -7,14 +9,40 @@ let contatos = [
 
 function listarContatos() {
     console.log('Lista de contatos:');
-    listarContatos().forEach(contato => {
+    contatos.forEach(contato => {
       console.log(`ID: ${contato.id}, Nome: ${contato.nome}, Telefone: ${contato.telefone}, Email: ${contato.email}`);
     });
-  return contatos;
+}
+
+function adicionarContato() {
+  const nome = prompt('Digite o nome do contato: ');
+  const telefone = prompt('Digite o telefone do contato: ');
+  const email = prompt('Digite o email do contato: ');
+
+  const novoContato = {
+    id: contatos.length > 0 ? contatos[contatos.length - 1].id + 1 : 1,
+    nome,
+    telefone,
+    email
+  };
+
+  contatos.push(novoContato);
+  console.log('Contato adicionado com sucesso!');
+}
+
+function excluirContato() {
+  const id = parseInt(prompt('Digite o ID do contato a ser excluído: '), 10);
+  const index = contatos.findIndex(contato => contato.id === id);
+
+  if (index !== -1) {
+    contatos.splice(index, 1);
+    console.log('Contato excluído com sucesso!');
+  } else {
+    console.log('Contato não encontrado.');
+  }
 }
 
 function main() {
-  const prompt = require('prompt-sync')();
   let sair = false;
 
   while (!sair) {
@@ -41,23 +69,6 @@ function main() {
 }
 
 main();
-
-function adicionarContato(contato) {
-  const novoContato = {
-    id: contatos.length > 0 ? contatos[contatos.length - 1].id + 1 : 1,
-    ...contato
-  };
-  contatos.push(novoContato);
-  return novoContato;
-}
-
-function excluirContato(id) {
-  const index = contatos.findIndex(contato => contato.id === id);
-  if (index !== -1) {
-    return contatos.splice(index, 1)[0];
-  }
-  return null;
-}
 
 module.exports = {
   listarContatos,
