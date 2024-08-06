@@ -30,6 +30,26 @@ function adicionarContato() {
   console.log('Contato adicionado com sucesso!');
 }
 
+function atualizarContato() {
+  const id = parseInt(prompt('Digite o ID do contato a ser atualizado: '), 10);
+  const contato = contatos.find(contato => contato.id === id);
+
+  if (contato) {
+    console.log('Deixe em branco se não quiser atualizar o campo.');
+    const novoNome = prompt(`Digite o novo nome (atual: ${contato.nome}): `) || contato.nome;
+    const novoTelefone = prompt(`Digite o novo telefone (atual: ${contato.telefone}): `) || contato.telefone;
+    const novoEmail = prompt(`Digite o novo email (atual: ${contato.email}): `) || contato.email;
+
+    contato.nome = novoNome;
+    contato.telefone = novoTelefone;
+    contato.email = novoEmail;
+
+    console.log('Contato atualizado com sucesso!');
+  } else {
+    console.log('Contato não encontrado.');
+  }
+}
+
 function excluirContato() {
   const id = parseInt(prompt('Digite o ID do contato a ser excluído: '), 10);
   const index = contatos.findIndex(contato => contato.id === id);
